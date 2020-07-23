@@ -1,3 +1,4 @@
+#include "zipcode.h"
 #include <vector>
 #include <string>
 #include <map>
@@ -7,12 +8,11 @@ using namespace std;
 class Zipcodes {
 public:
 	Zipcodes();
-	void addZipcode(std::string code, std::string neighbor, int neighborDistance);
-	void addNeighbor(std::string code, std::string neighbor, int neighborDistance);
-	void addVehicle(std::string code, int vehicleType);
-	bool zipExists(std::string code);
-	std::map<string, vector<pair<string, int>>> zips;
-	std::map<string, vector<int>> vehicles;
+	void addZip(Zipcode zip);
+	bool hasZip(std::string code);
+	Zipcode& getZip(std::string code);
 	void printZips();
-	void printVehicles();
+
+private:
+	map<std::string, Zipcode> zips;
 };
