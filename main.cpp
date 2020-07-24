@@ -61,9 +61,9 @@ Zipcodes generateTestZipcodes() {
 		zipcodes.addZip(zip2);
 	}
 
-	for (int i = 0; i < vehicles.size(); i = i + 2) {
+	for (int i = 0, j = 0; i < vehicles.size(); i = i + 2, j++) {
 		Zipcode* z = &zipcodes.getZip(vehicles[i + 1]);
-		z->addVehicle(stoi(vehicles[i]));
+		z->addVehicle(j, stoi(vehicles[i]));
 	}
 
 	return zipcodes;

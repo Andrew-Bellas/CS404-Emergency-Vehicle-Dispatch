@@ -12,21 +12,23 @@ Zipcode::Zipcode(std::string zipcode) {
 }
 
 bool Zipcode::hasVehicle(int type) {
-	if (std::find(vehicles.begin(), vehicles.end(), type) == vehicles.end()) {
-		return false;
+	for (auto it = vehicles.begin(); it != vehicles.end(); it++) {
+		if(it->getType() == type)
+			return true; 
 	}
-	return true;
+	return false;
 }
 
 void Zipcode::removeVehicle(int type) {
-	auto it = std::find(vehicles.begin(), vehicles.end(), type);
-
-	if (it != vehicles.end())
-		vehicles.erase(it);
+	for (auto it = vehicles.begin(); it != vehicles.end(); it++) {
+		if (it->getType() == type)
+			vehicles.erase(it);
+	}
 }
 
-void Zipcode::addVehicle(int type) {
-	vehicles.push_back(type);
+void Zipcode::addVehicle(int type, int id) {
+	Vehicle v(type, id);
+	vehicles.push_back(v);
 }
 
 bool Zipcode::hasNeighbor(std::string code) {
@@ -47,6 +49,11 @@ void Zipcode::addNeighbor(std::string code, int distance) {
 	neighbors[code] = distance;
 }
 
+std::map<std::string, int> Zipcode::getNeighbors()
+{
+	return neighbors;
+}
+
 int Zipcode::getNeighborDistance(std::string code)
 {
 	if (hasNeighbor(code)) {
@@ -65,7 +72,7 @@ std::string Zipcode::getCode()
 void Zipcode::displayVechles() {
 	std::cout << "Vehicles:";
 	for (auto it = vehicles.begin(); it != vehicles.end(); it++) {
-		std::cout << " " << *it;
+		std::cout << " ID: " << it->getId() << " Type:" << it->getType();
 	}
 	std::cout << std::endl;
 }
