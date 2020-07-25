@@ -19,11 +19,15 @@ bool Zipcode::hasVehicle(int type) {
 	return false;
 }
 
-void Zipcode::removeVehicle(int type) {
+int Zipcode::removeVehicle(int type) {
 	for (auto it = vehicles.begin(); it != vehicles.end(); it++) {
-		if (it->getType() == type)
+		if (it->getType() == type) {
+			int id = it->getId();
 			vehicles.erase(it);
+			return id;
+		}
 	}
+	return -1;
 }
 
 void Zipcode::addVehicle(int type, int id) {
@@ -52,16 +56,6 @@ void Zipcode::addNeighbor(std::string code, int distance) {
 std::map<std::string, int> Zipcode::getNeighbors()
 {
 	return neighbors;
-}
-
-int Zipcode::getNeighborDistance(std::string code)
-{
-	if (hasNeighbor(code)) {
-		return neighbors[code];
-	}
-	else {
-		return -1;
-	}
 }
 
 std::string Zipcode::getCode()

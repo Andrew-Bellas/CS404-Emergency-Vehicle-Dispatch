@@ -10,20 +10,40 @@ using namespace std;
 
 class Zipcodes {
 public:
+	// Default constructor
 	Zipcodes();
+
+	/*
+	* Adds a zipcode
+	*
+	* @param zip The Zipcode object to add 
+	*/
 	void addZip(Zipcode zip);
+
+	/*
+	* Checks if there is a zipcode with a certain code 
+	*
+	* @param code Code of the zipcode
+	* @return True if there is Zipcode with the code
+	*/
 	bool hasZip(std::string code);
+
+	/*
+	* Gets a zipcode from the collection
+	*
+	* @param code The code for the zipcode 
+	* @return A reference to the zipcode 
+	*/
 	Zipcode& getZip(std::string code);
+	
+	// Displays all zipcode information
 	void printZips();
-	std::pair<Zipcode, int> exectuteRequest(Request);
+	
+	// Returns the number of zipcodes
 	int size(); 
+
+	std::tuple<Zipcode, int, int> exectuteRequest(Request);
 
 private:
 	map<std::string, Zipcode> zips;
-	void addNeighborsAvailableZipcodes(
-		std::set<std::pair<int, std::string>>* availableZipcodes,
-		std::map<std::string, int> neighbors,
-		int currentDistance,
-		std::set<std::string>* visitedZipcodes
-	);
 };

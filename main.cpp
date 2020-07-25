@@ -101,19 +101,26 @@ int main() {
 
 		// prompt user for the action 
 		std::cout << " Please Select an Action- " << std::endl;
-		std::cout << "    (1) Execute Next Request" << std::endl;
+		std::cout << "    (1) Execute Next Queued Request" << std::endl;
 		std::cout << "    (2) View Current Zipcode Information" << std::endl;
 		std::cout << "    (3) Exit" << std::endl << "  ";
 		std::cin >> actionSelection;
 		std::cout << std::endl; 
 
 		if (actionSelection == 1) {
-			Request req = testRequests.front();
-			std::cout << "Requesting Vehicle Type " << req.getRequestedVehicle() << " for zipcode " << req.getRequestedZipcode() << std::endl;
-			std::pair<Zipcode, int> result = testZipcodes.exectuteRequest(req);
-			std::cout << "Dispatching vehicle from " << result.first.getCode() << " with distance " << result.second << std::endl << std::endl;
+			try {
+				Request req = testRequests.front();
+				std::cout << "Requesting Vehicle Type " << req.getRequestedVehicle() << 
+					" for zipcode " << req.getRequestedZipcode() << std::endl;
+				std::tuple<Zipcode, int, int> result = testZipcodes.exectuteRequest(req);
+				std::cout << "Dispatching vehicle from " << std::get<0>(result).getCode() << 
+					" (ID: " << std::get<2>(result) << ") with distance " << std::get<1>(result) 
+					<< std::endl << std::endl;
+			} 
+			catch (std::logic_error error) {
+				std::cout << error.what() << std::endl << std::endl;
+			}
 			testRequests.pop();
-
 		}
 		else if (actionSelection == 2) {
 			std::cout << "        *| Current Zipcode Information |*" << std::endl << std::endl;
@@ -124,7 +131,7 @@ int main() {
 			return 0;
 		}
 		
-		// prevent infinte loops from invalid input 
+		// prevent infinte loop from invalid input 
 		cin.clear();
 		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
