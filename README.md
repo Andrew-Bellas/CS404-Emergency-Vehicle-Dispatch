@@ -19,6 +19,10 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 * The zipcodes containing the desired vehicle will then have their distances to the requested zipcode compared. We want the most efficient selection to be made, so we choose the zip with the shortest distance to travel
 * After the selection has been made, we then remove the vehicle from the zipcode it was found at
 
+**Algorithm Mapping Diagram**
+---
+![Algorithm Mapping Diagram](Algorithm Mapping Diagram.png)
+
 **Efficiency**
 ---
 *Efficiency of Algorithms: Mention the Big-O of the required functions (just the significant functions, not minor things like setters and getters).  Mention if it is possible to do better.*
