@@ -1,7 +1,7 @@
 #include "Zipcodes.h"
-#include "Request.h"
 #include <string>
 #include <vector>
+#include <queue>
 #include <algorithm>
 
 Zipcode generateTestZipcode(std::string code, Zipcodes zips) {
@@ -13,8 +13,9 @@ Zipcode generateTestZipcode(std::string code, Zipcodes zips) {
 	}
 }
 
-std::vector<Request> generateTestRequests() {
-	std::vector<std::string> req = { "3", "64156", "3", "64152", "2", "64156", "3", "64153", "1", "64159", "3",
+std::queue<Request> generateTestRequests() {
+	/*
+	std::vector<std::string> req = { "1", "64156", "3", "64152", "2", "64156", "3", "64153", "1", "64159", "3",
 		"64153", "3", "64154", "1", "64151", "3", "64150", "2", "64155", "2", "64156", "1",
 		"64151", "1", "64153", "2", "64156", "1", "64150", "1", "64151", "1", "64158", "1",
 		"64155", "1", "64153", "2", "64152", "1", "64151", "3", "64151", "1", "64156", "2",
@@ -23,11 +24,22 @@ std::vector<Request> generateTestRequests() {
 		"64152", "2", "64159", "3", "64154", "3", "64159", "3", "64159", "2", "64158", "1",
 		"64158", "1", "64151", "3", "64158", "3", "64150", "2", "64155", "1", "64155", "2",
 		"64159", "3", "64153", "3", "64151" };
+	*/
 
-	std::vector<Request> requests;
+	std::vector<std::string> req = { "3", "64163", "3", "64152", "2", "64156", "3", "64153", "1", "64159", "3",
+	"64153", "3", "64154", "1", "64151", "3", "64150", "2", "64155", "2", "64156", "1",
+	"64151", "1", "64153", "2", "64156", "1", "64150", "1", "64151", "1", "64158", "1",
+	"64155", "1", "64153", "2", "64152", "1", "64151", "3", "64151", "1", "64156", "2",
+	"64152", "3", "64155", "3", "64156", "1", "64158", "1", "64154", "2", "64154", "3",
+	"64155", "1", "64154", "3", "64156", "2", "64159", "2", "64159", "1", "64156", "1",
+	"64152", "2", "64159", "3", "64154", "3", "64159", "3", "64159", "2", "64158", "1",
+	"64158", "1", "64151", "3", "64158", "3", "64150", "2", "64155", "1", "64155", "2",
+	"64159", "3", "64153", "3", "64151" };
+
+	std::queue<Request> requests;
 
 	for (int i = 0; i < req.size(); i = i + 2) {
-		requests.push_back(Request(std::stoi(req[i]), req[i + 1]));
+		requests.push(Request(std::stoi(req[i]), req[i + 1]));
 	}
 	return requests; 
 }
@@ -39,11 +51,19 @@ Zipcodes generateTestZipcodes() {
 		"64159", "64160", "10", "64160", "64161", "5", "64161", "64162", "9", "64162",
 		"64163", "2", "64163", "64164", "3", "64164", "64165", "4" };
 
+	/*
 	std::vector<string> vehicles = { "1","64150","1","64150","2","64151","2","64151","3","64152",
 		"2","64152","2","64153","2","64153","1","64154","3","64154","3","64155","1","64155",
 		"3","64156","3","64156","3","64157","2","64157","3","64158","1","64158","3","64159",
 		"3","64159","1","64160","3","64160","1","64161","3","64161","1","64162","1","64162",
 		"3","64163","3","64163","3","64164","1","64164","2","64165","1","64165" };
+	*/
+
+	std::vector<string> vehicles = { "1","64150","2","64150","3","64151","1","64151","1","64152",
+	"1","64152","1","64153","1","64153","1","64154","1","64154","1","64155","1","64155",
+	"1","64156","1","64156","1","64157","1","64157","1","64158","1","64158","1","64159",
+	"1","64159","1","64160","1","64160","1","64161","1","64161","2","64162","1","64162",
+	"1","64163","1","64163","1","64164","1","64164","1","64165","1","64165" };
 
 	Zipcodes zipcodes;
 	for (int i = 0; i < distances.size(); i = i + 3) {
@@ -72,7 +92,7 @@ Zipcodes generateTestZipcodes() {
 int main() {
 	// generate test data
 	Zipcodes testZipcodes = generateTestZipcodes();
-	std::vector<Request> testRequests = generateTestRequests(); 
+	std::queue<Request> testRequests = generateTestRequests(); 
 
 	// run application
 	std::cout << "      ***| Emergency Vehicle Dispatch |***" << std::endl;
@@ -88,7 +108,12 @@ int main() {
 		std::cout << std::endl; 
 
 		if (actionSelection == 1) {
-			// Execute Request
+			Request req = testRequests.front();
+			std::cout << "Requesting Vehicle Type " << req.getRequestedVehicle() << " for zipcode " << req.getRequestedZipcode() << std::endl;
+			std::pair<Zipcode, int> result = testZipcodes.exectuteRequest(req);
+			std::cout << "Dispatching vehicle from " << result.first.getCode() << " with distance " << result.second << std::endl << std::endl;
+			testRequests.pop();
+
 		}
 		else if (actionSelection == 2) {
 			std::cout << "        *| Current Zipcode Information |*" << std::endl << std::endl;

@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <list>
+#include <set>
 
 using namespace std;
 
@@ -14,7 +16,14 @@ public:
 	Zipcode& getZip(std::string code);
 	void printZips();
 	std::pair<Zipcode, int> exectuteRequest(Request);
+	int size(); 
 
 private:
 	map<std::string, Zipcode> zips;
+	void addNeighborsAvailableZipcodes(
+		std::set<std::pair<int, std::string>>* availableZipcodes,
+		std::map<std::string, int> neighbors,
+		int currentDistance,
+		std::set<std::string>* visitedZipcodes
+	);
 };

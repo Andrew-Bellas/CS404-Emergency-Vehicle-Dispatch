@@ -1,10 +1,7 @@
 #include "zipcodes.h"
-#include <vector>
-#include <map>
-#include <string>
 #include <iostream>
 #include <algorithm>
-#include <list>
+
 
 Zipcodes::Zipcodes() {
 	// empty 
@@ -35,10 +32,9 @@ void Zipcodes::printZips() {
 }
 
 std::pair<Zipcode, int> Zipcodes::exectuteRequest(Request req) {
-	int distance = 0;
+	std::set<std::pair<int, std::string>>* availableZipcodes = new std::set<std::pair<int, std::string>>;
+	std::set<std::string>* visitedZipcodes = new std::set<std::string>;
 
-	// string: zipcode, int: distance to requested zipcode 
-	std::list<std::pair<int, std::string>> availableZipcodes;
 	int reqVehicle = req.getRequestedVehicle();
 	std::string reqZipcode = req.getRequestedZipcode();
 
@@ -46,22 +42,40 @@ std::pair<Zipcode, int> Zipcodes::exectuteRequest(Request req) {
 	if (getZip(reqZipcode).hasVehicle(reqVehicle)) {
 		return std::pair<Zipcode, int>(getZip(reqZipcode), 0);
 	}
+	visitedZipcodes->insert(reqZipcode);
 
-	// adding neighbors 
+	// adding first neighbors 
 	std::map<std::string, int> neighbors = getZip(reqZipcode).getNeighbors();
-	for (auto it = neighbors.begin(); it != neighbors.end(); it++) {
-		availableZipcodes.push_back(std::make_pair(neighbors.at(reqZipcode), it->first));
-		availableZipcodes.sort(); // sort() uses standard < operator and std::pair.first by default
+	addNeighborsAvailableZipcodes(availableZipcodes, neighbors, 0, visitedZipcodes);
+
+	while (size() > visitedZipcodes->size()) {
+
+		// check smallest available zipcode for vehicle
+		Zipcode smallestZipcode = getZip(availableZipcodes->begin()->second);
+		int currentDistance = availableZipcodes->begin()->first;
+		if (smallestZipcode.hasVehicle(reqVehicle)) {
+			return std::make_pair(getZip(availableZipcodes->begin()->second), currentDistance);
+		}
+		else {
+			availableZipcodes->erase(availableZipcodes->begin());
+			addNeighborsAvailableZipcodes(availableZipcodes, smallestZipcode.getNeighbors(), currentDistance, visitedZipcodes);
+			visitedZipcodes->insert(smallestZipcode.getCode());
+		}
 	}
+	// throw exception here 
+}
 
-	// check smallest neighbor for vehicle
-	if (getZip(availableZipcodes.front().second).hasVehicle(reqVehicle)) {
-		distance += distance + neighbors.at(reqZipcode);
-		return std::make_pair(getZip(availableZipcodes.front().second), distance);
-	}
+int Zipcodes::size() {
+	return zips.size();
+}
 
-
-	
+void Zipcodes::addNeighborsAvailableZipcodes(std::set<std::pair<int, std::string>>* availableZipcodes,
+	std::map<std::string, int> neighbors,
+	int currentDistance, 
+	std::set<std::string>* visitedZipcodes) {
+		for (auto it = neighbors.begin(); it != neighbors.end(); it++) {
+			availableZipcodes->insert((std::make_pair(it->second + currentDistance, it->first)));
+		}
 }
 
 
