@@ -23,7 +23,9 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 * If zipcode 'A' does not have the appropriate vehicle, then we want to search neighbor zipcodes. We check vehicle availability of the requested vehicle type on neighbor with the shortest distance and if a match is found we return the zipcode it was found at and the distance to the requesting zipcode.
 * As we navigate through the zipcodes we accumulate a running total distance based on previous distance and the distance to the next neighbor zipcode
 * The zipcodes containing the desired vehicle will then have their distances to the requested zipcode compared. We want the most efficient selection to be made, so we choose the zip with the shortest distance to travel
-* After the selection has been made, we then remove the vehicle from the zipcode it was found at
+* After the selection has been made, we then remove the vehicle from the zipcode it was found at.
+* If the neighbor does not have the requested vehicle, we continue to loop until a match is found, during this time distance accumulates and zipcodes are added to the visitedZipcodes set as we compare each one.
+* If the loop finishes and no matches are found, we throw a "Not Found exception".
 
 **Algorithm Mapping Diagram**
 ---
