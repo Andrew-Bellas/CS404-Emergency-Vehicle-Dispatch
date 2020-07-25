@@ -9,6 +9,9 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 * Not every zipcode will have the requested vehicle available
 * Based on the example distance data, each zip code has two neighbors
 
+**Neighbors**
+<a href="https://imgur.com/ZGf26W3"><img src="https://i.imgur.com/ZGf26W3.png" title="source: imgur.com" /></a>
+
 **Explanation**
 ---
 *Brief Explanation of the Idea: Explain your idea briefly with some diagrams and text.*
