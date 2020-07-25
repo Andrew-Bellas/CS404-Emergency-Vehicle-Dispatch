@@ -21,7 +21,7 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 
 **Algorithm Mapping Diagram**
 ---
-![Algorithm Mapping Diagram](Algorithm Mapping Diagram.png)
+<a href="https://imgur.com/MDeugqs"><img src="https://i.imgur.com/MDeugqs.png" title="source: imgur.com" /></a>
 
 **Efficiency**
 ---
