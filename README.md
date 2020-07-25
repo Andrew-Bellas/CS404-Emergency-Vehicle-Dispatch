@@ -3,7 +3,7 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 
 Assumptions: List any assumptions that you made that aren’t mentioned of the project description.
 
-**Assumptions**
+**Assumptions** ---
 * Whenever an applicable vehicle is found, that vehicle is removed from the zipcode's available vehicles
 * Not every zipcode will have the requested vehicle available
 * Based on the example distance data, each zip code has two neighbors
