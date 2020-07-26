@@ -36,7 +36,10 @@ void addNeighborsAvailableZipcodes(std::set<std::pair<int, std::string>>* availa
 	int currentDistance,
 	std::set<std::string>* visitedZipcodes) {
 	for (auto it = neighbors.begin(); it != neighbors.end(); it++) {
-		availableZipcodes->insert((std::make_pair(it->second + currentDistance, it->first)));
+		// If we already visited a zipcode then we dont need to visit again since we are now further away
+		if (visitedZipcodes->find(it->first) == visitedZipcodes->end()) {
+			availableZipcodes->insert((std::make_pair(it->second + currentDistance, it->first)));
+		}
 	}
 }
 

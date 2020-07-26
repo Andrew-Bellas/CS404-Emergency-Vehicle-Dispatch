@@ -42,7 +42,19 @@ public:
 	// Returns the number of zipcodes
 	int size(); 
 
-	std::tuple<Zipcode, int, int> exectuteRequest(Request);
+	/*
+	* Processes a dispatch request, looks for the closest zipcode with the 
+	* requested vehicle type if there is not an applicable vehicle at the requested zipcode
+	* it returns the closest vehicle to the requested zipcode. 
+	* Returns std::logic exception if no match exists
+	* 
+	* @param req The Request object to execute 
+	* @return A tuple containing:
+	*	Zipcode- The Zipcode object that containing the vehicle
+	*	int- The distance from the requested zip to the vehicle
+	*	int- The unique id of the vehicle 
+	*/
+	std::tuple<Zipcode, int, int> exectuteRequest(Request req);
 
 private:
 	map<std::string, Zipcode> zips;
