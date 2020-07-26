@@ -35,8 +35,8 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 ---
 *Efficiency of Algorithms: Mention the Big-O of the required functions (just the significant functions, not minor things like setters and getters).  Mention if it is possible to do better.*
 
-* addNeighborAvailableZipcodes
-* executeRequest
+* addNeighborAvailableZipcodes - This function is important for keeping track of what zipcodes we wish to process and determine whether or not a match exists. The function is a for loop with a total of two elements per zip code with a time complexity of **O(n)**
+* executeRequest - Starts with the initial requested zipcode and continues looping through the shortest path until the requested vehicle type is found. If no vehicle is found, we will reach the worse case scenario time complexity of **O(n)**
  
 **References**
 ---
