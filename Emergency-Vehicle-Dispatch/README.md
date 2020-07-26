@@ -9,6 +9,12 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 * Not every zipcode will have the requested vehicle available
 * Based on the example distance data, each zip code has two neighbors
 
+**Neighbors**
+<a href="https://imgur.com/ZGf26W3"><img src="https://i.imgur.com/ZGf26W3.png" title="source: imgur.com" /></a>
+
+**Removing Vehicles**
+<a href="https://imgur.com/EZtERSg"><img src="https://i.imgur.com/EZtERSg.png" title="source: imgur.com" /></a>
+
 **Explanation**
 ---
 *Brief Explanation of the Idea: Explain your idea briefly with some diagrams and text.*
@@ -17,18 +23,23 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 * If zipcode 'A' does not have the appropriate vehicle, then we want to search neighbor zipcodes. We check vehicle availability of the requested vehicle type on neighbor with the shortest distance and if a match is found we return the zipcode it was found at and the distance to the requesting zipcode.
 * As we navigate through the zipcodes we accumulate a running total distance based on previous distance and the distance to the next neighbor zipcode
 * The zipcodes containing the desired vehicle will then have their distances to the requested zipcode compared. We want the most efficient selection to be made, so we choose the zip with the shortest distance to travel
-* After the selection has been made, we then remove the vehicle from the zipcode it was found at
+* After the selection has been made, we then remove the vehicle from the zipcode it was found at.
+* If the neighbor does not have the requested vehicle, we continue to loop until a match is found, during this time distance accumulates and zipcodes are added to the visitedZipcodes set as we compare each one.
+* If the loop finishes and no matches are found, we throw a "Not Found exception".
 
 **Algorithm Mapping Diagram**
 ---
-![Algorithm Mapping Diagram](Algorithm Mapping Diagram.png)
+<a href="https://imgur.com/MDeugqs"><img src="https://i.imgur.com/MDeugqs.png" title="source: imgur.com" /></a>
+
+**UML Diagram**
+<a href="https://imgur.com/y1x0cl0"><img src="https://i.imgur.com/y1x0cl0.png" title="source: imgur.com" /></a>
 
 **Efficiency**
 ---
 *Efficiency of Algorithms: Mention the Big-O of the required functions (just the significant functions, not minor things like setters and getters).  Mention if it is possible to do better.*
 
-* addNeighborAvailableZipcodes
-* executeRequest
+* addNeighborAvailableZipcodes - This function is important for keeping track of what zipcodes we wish to process and determine whether or not a match exists. The function is a for loop with a total of two elements per zip code with a time complexity of **O(n)**
+* executeRequest - Starts with the initial requested zipcode and continues looping through the shortest path until the requested vehicle type is found. If no vehicle is found, we will reach the worse case scenario time complexity of **O(n)**
  
 **References**
 ---
