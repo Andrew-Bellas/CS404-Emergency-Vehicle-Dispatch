@@ -31,6 +31,9 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 ---
 <a href="https://imgur.com/MDeugqs"><img src="https://i.imgur.com/MDeugqs.png" title="source: imgur.com" /></a>
 
+**UML Diagram**
+<a href="https://imgur.com/y1x0cl0"><img src="https://i.imgur.com/y1x0cl0.png" title="source: imgur.com" /></a>
+
 **Efficiency**
 ---
 *Efficiency of Algorithms: Mention the Big-O of the required functions (just the significant functions, not minor things like setters and getters).  Mention if it is possible to do better.*
