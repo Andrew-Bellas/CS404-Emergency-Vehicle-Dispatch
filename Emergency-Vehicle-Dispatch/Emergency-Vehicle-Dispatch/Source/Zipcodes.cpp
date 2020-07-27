@@ -31,10 +31,14 @@ void Zipcodes::printZips() {
 	}
 }
 
+int Zipcodes::size() {
+	return zips.size();
+}
+
 void addNeighborsAvailableZipcodes(std::set<std::pair<int, std::string>>* availableZipcodes,
-	std::map<std::string, int> neighbors,
-	int currentDistance,
-	std::set<std::string>* visitedZipcodes) {
+		std::map<std::string, int> neighbors,
+		int currentDistance,
+		std::set<std::string>* visitedZipcodes) {
 	for (auto it = neighbors.begin(); it != neighbors.end(); it++) {
 		// If we already visited a zipcode then we dont need to visit again since we are now further away
 		if (visitedZipcodes->find(it->first) == visitedZipcodes->end()) {
@@ -51,16 +55,8 @@ std::tuple<Zipcode, int, int> Zipcodes::exectuteRequest(Request req) {
 	int reqVehicle = req.getRequestedVehicle();
 	std::string reqZipcode = req.getRequestedZipcode();
 
-	// if requested zip has vehicle
-	if (getZip(reqZipcode).hasVehicle(reqVehicle)) {
-		int vehicleId = getZip(reqZipcode).removeVehicle(reqVehicle);
-		return std::make_tuple(getZip(reqZipcode), 0, vehicleId);
-	}
-	visitedZipcodes->insert(reqZipcode);
-
-	// adding first neighbors 
-	std::map<std::string, int> neighbors = getZip(reqZipcode).getNeighbors();
-	addNeighborsAvailableZipcodes(availableZipcodes, neighbors, 0, visitedZipcodes);
+	// Start at reqZipcode
+	availableZipcodes->insert(std::make_pair(0, reqZipcode));
 
 	while (size() > visitedZipcodes->size()) {
 
@@ -80,9 +76,6 @@ std::tuple<Zipcode, int, int> Zipcodes::exectuteRequest(Request req) {
 	throw std::logic_error("ERROR: there is no vehicle with type " + std::to_string(reqVehicle) + " available (Request Skipped)");
 }
 
-int Zipcodes::size() {
-	return zips.size();
-}
 
 
 

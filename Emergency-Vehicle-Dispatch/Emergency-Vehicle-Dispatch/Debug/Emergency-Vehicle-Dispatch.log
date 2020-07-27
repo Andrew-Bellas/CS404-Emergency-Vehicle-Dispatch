@@ -1,5 +1,8 @@
-﻿  main.cpp
+﻿  Zipcodes.cpp
+c:\school\algorithims and complexity\project\cs404-emergency-vehicle-dispatch\emergency-vehicle-dispatch\emergency-vehicle-dispatch\source\zipcodes.cpp(61): warning C4018: '>': signed/unsigned mismatch
+  main.cpp
 c:\school\algorithims and complexity\project\cs404-emergency-vehicle-dispatch\emergency-vehicle-dispatch\emergency-vehicle-dispatch\source\main.cpp(30): warning C4018: '<': signed/unsigned mismatch
 c:\school\algorithims and complexity\project\cs404-emergency-vehicle-dispatch\emergency-vehicle-dispatch\emergency-vehicle-dispatch\source\main.cpp(50): warning C4018: '<': signed/unsigned mismatch
 c:\school\algorithims and complexity\project\cs404-emergency-vehicle-dispatch\emergency-vehicle-dispatch\emergency-vehicle-dispatch\source\main.cpp(65): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   Emergency-Vehicle-Dispatch.vcxproj -> C:\School\Algorithims and Complexity\Project\CS404-Emergency-Vehicle-Dispatch\Emergency-Vehicle-Dispatch\Debug\Emergency-Vehicle-Dispatch.exe

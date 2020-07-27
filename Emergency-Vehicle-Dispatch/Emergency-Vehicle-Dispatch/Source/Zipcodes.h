@@ -43,12 +43,12 @@ public:
 	/*
 	* Processes a dispatch request, looks for the closest zipcode with the 
 	* requested vehicle type if there is not an applicable vehicle at the requested zipcode
-	* it returns the closest vehicle to the requested zipcode. 
-	* Returns std::logic exception if no match exists
+	* it returns the closest vehicle of the specified type to the requested zipcode. 
+	* Throws std::logic_error if no match exists
 	* 
 	* @param req The Request object to execute 
-	* @return A tuple containing:
-	*	Zipcode- The Zipcode object that containing the vehicle
+	* @return A std::tuple containing:
+	*	Zipcode- The Zipcode object containing the vehicle
 	*	int- The distance from the requested zip to the vehicle
 	*	int- The unique id of the vehicle 
 	*/
