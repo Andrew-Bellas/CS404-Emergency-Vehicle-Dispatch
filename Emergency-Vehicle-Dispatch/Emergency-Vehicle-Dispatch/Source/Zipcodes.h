@@ -2,7 +2,7 @@
 #include "request.h"
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <list>
 #include <set>
 
@@ -55,5 +55,5 @@ public:
 	std::tuple<Zipcode, int, int> exectuteRequest(Request req);
 
 private:
-	std::map<std::string, Zipcode> zips;
+	std::unordered_map<std::string, Zipcode> zips;
 };

@@ -1,7 +1,7 @@
 #include "vehicle.h"
 #include <iostream>
 #include <vector>
-#include <map>
+#include <unordered_map>
 
 class Zipcode {
 public:
@@ -63,7 +63,7 @@ public:
 	void addNeighbor(std::string code, int distance);
 
 	// Accessor for neighbors
-	std::map<std::string, int> getNeighbors(); 
+	std::unordered_map<std::string, int> getNeighbors(); 
 
 	// Accessor for code 
 	std::string getCode();
@@ -82,7 +82,7 @@ private:
 	*   String: the code of the neighbor (ex. 64154)
 	*   Int: the distance to the neighbor 
 	*/
-	std::map<std::string, int> neighbors;
+	std::unordered_map<std::string, int> neighbors;
 
 	// All vehicles at the zipcode 
 	std::vector<Vehicle> vehicles;

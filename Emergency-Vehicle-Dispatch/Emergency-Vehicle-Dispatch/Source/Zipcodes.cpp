@@ -35,19 +35,6 @@ int Zipcodes::size() {
 	return zips.size();
 }
 
-void addNeighborsAvailableZipcodes(std::set<std::pair<int, std::string>>* availableZipcodes,
-		std::map<std::string, int> neighbors,
-		int currentDistance,
-		std::set<std::string>* visitedZipcodes) {
-	for (auto it = neighbors.begin(); it != neighbors.end(); it++) {
-		// If we already visited a zipcode then we dont need to visit again since we are now further away
-		if (visitedZipcodes->find(it->first) == visitedZipcodes->end()) {
-			availableZipcodes->insert((std::make_pair(it->second + currentDistance, it->first)));
-		}
-	}
-}
-
-
 std::tuple<Zipcode, int, int> Zipcodes::exectuteRequest(Request req) {
 	std::set<std::pair<int, std::string>>* availableZipcodes = new std::set<std::pair<int, std::string>>;
 	std::set<std::string>* visitedZipcodes = new std::set<std::string>;
@@ -69,7 +56,13 @@ std::tuple<Zipcode, int, int> Zipcodes::exectuteRequest(Request req) {
 		}
 		else {
 			availableZipcodes->erase(availableZipcodes->begin());
-			addNeighborsAvailableZipcodes(availableZipcodes, smallestZipcode.getNeighbors(), currentDistance, visitedZipcodes);
+			std::unordered_map<std::string, int> neighbors = smallestZipcode.getNeighbors();
+			for (auto it = neighbors.begin(); it != neighbors.end(); it++) {
+				// If we already visited a zipcode then we dont need to visit again since we are now further away
+				if (visitedZipcodes->find(it->first) == visitedZipcodes->end()) {
+					availableZipcodes->insert((std::make_pair(it->second + currentDistance, it->first)));
+				}
+			}
 			visitedZipcodes->insert(smallestZipcode.getCode());
 		}
 	}

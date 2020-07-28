@@ -38,8 +38,8 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 ---
 *Efficiency of Algorithms: Mention the Big-O of the required functions (just the significant functions, not minor things like setters and getters).  Mention if it is possible to do better.*
 
-* addNeighborAvailableZipcodes - This function is important for keeping track of what zipcodes we wish to process and determine whether or not a match exists. The function is a for loop with a total of two elements per zip code with a time complexity of **O(n)**
-* executeRequest - Starts with the initial requested zipcode and continues looping through the shortest path until the requested vehicle type is found. If no vehicle is found, we will reach the worse case scenario time complexity of **O(n)**
+* getZip - This function is important as it is used within the executeRequest function. It utilizes a std::unordered_map which has an average case complexity of O(1) but a rare worst case of O(n).
+* executeRequest - This algorithm utilizes a version of Dijkstra’s Algorithm using a set and adjacency list. The worst case occurs when there is no vehicle of the requested type or the vehicle is found in the furthest zipcode. It is O(ElogV) where E is the number of neighbors (edges) and V is the number of zipcodes (vertexes).
  
 **References**
 ---
@@ -47,3 +47,4 @@ Project for COMP-SCI 404 (Algorithms and Complexity)
 
 * Sets: https://www.geeksforgeeks.org/set-in-cpp-stl/
 * Maps: http://www.cplusplus.com/reference/map/map/?kw=map 
+* Unordered Map: https://en.cppreference.com/w/cpp/container/unordered_map

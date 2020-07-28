@@ -53,7 +53,7 @@ void Zipcode::addNeighbor(std::string code, int distance) {
 	neighbors[code] = distance;
 }
 
-std::map<std::string, int> Zipcode::getNeighbors()
+std::unordered_map<std::string, int> Zipcode::getNeighbors()
 {
 	return neighbors;
 }
